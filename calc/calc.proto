@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package calc;
+
+option go_package = "calc/calc";
+
+message TwoNumRequest {
+  int64 num1 = 1;
+  int64 num2 = 2;
+}
+
+message SumResponse {
+  int64 sum = 1;
+}
+
+message NumRequest {
+  int64 num = 1;
+}
+
+message AllPrimesResponse {
+  int64 num = 1;
+}
+
+message AverageResponse {
+  float num = 1;
+}
+
+message MaxNumResponse {
+  int64 num = 1;
+}
+
+service Calc {
+
+  rpc TwoSum (TwoNumRequest) returns (SumResponse) {};
+
+  rpc PrimeNums (NumRequest) returns (stream AllPrimesResponse) {};
+
+  rpc Average (stream NumRequest) returns (AverageResponse) {};
+
+  rpc MaxNumber (stream NumRequest) returns (stream MaxNumResponse) {};
+}
